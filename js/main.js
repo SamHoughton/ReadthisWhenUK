@@ -24,8 +24,24 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Mobile nav toggle
+  // Header rides transparent over the full-screen hero, then picks up
+  // a solid background once the hero has scrolled out from under it.
   var header = document.querySelector(".site-header");
+  var heroEl = document.querySelector(".hero");
+  if (header && heroEl) {
+    var updateHeaderState = function () {
+      var heroBottom = heroEl.getBoundingClientRect().bottom;
+      header.classList.toggle(
+        "site-header--scrolled",
+        heroBottom <= header.offsetHeight
+      );
+    };
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+    window.addEventListener("resize", updateHeaderState);
+  }
+
+  // Mobile nav toggle
   var toggle = document.getElementById("nav-toggle");
   var navPanel = document.getElementById("site-nav");
 
@@ -94,28 +110,6 @@
         ScrollTrigger.refresh();
       });
     }
-  }
-
-  // Mouse-tracked card tilt
-  if (
-    window.matchMedia("(pointer: fine) and (hover: hover)").matches &&
-    !prefersReducedMotion
-  ) {
-    document.querySelectorAll("[data-tilt]").forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;
-        var py = (e.clientY - r.top) / r.height;
-        var rx = (px - 0.5) * 14;
-        var ry = (0.5 - py) * 14;
-        card.style.setProperty("--rx", rx.toFixed(2) + "deg");
-        card.style.setProperty("--ry", ry.toFixed(2) + "deg");
-      });
-      card.addEventListener("mouseleave", function () {
-        card.style.setProperty("--rx", "0deg");
-        card.style.setProperty("--ry", "0deg");
-      });
-    });
   }
 
   // Ink-stamp press effect on buttons
