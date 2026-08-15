@@ -1,6 +1,25 @@
 (function () {
   "use strict";
 
+  var prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  var hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+  // Smooth scroll (Lenis), wired into GSAP's ticker so ScrollTrigger
+  // stays in sync with it rather than fighting native scroll.
+  if (hasGsap && typeof window.Lenis !== "undefined" && !prefersReducedMotion) {
+    var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    window.lenis = lenis;
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (time) {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  }
+
   // Footer year
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -24,31 +43,57 @@
     });
   }
 
-  // Scroll reveal
+  // Scroll reveal, scrubbed to scroll position rather than a one-shot
+  // fade-in, and only ever applied once GSAP has actually loaded, so a
+  // CDN failure or reduced-motion leaves everything simply visible.
   var revealEls = document.querySelectorAll("[data-reveal]");
-  var prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  if (hasGsap && !prefersReducedMotion) {
+    revealEls.forEach(function (el) {
+      // Sticky columns get a plain one-shot fade: a scrub tied to the
+      // element's own position breaks once it pins and stops moving.
+      var isSticky = el.classList.contains("sticky-col");
+      gsap.from(el, {
+        opacity: 0,
+        y: 28,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: isSticky
+          ? { trigger: el, start: "top 90%", toggleActions: "play none none none" }
+          : { trigger: el, start: "top 88%", end: "top 55%", scrub: 0.6 },
+      });
+    });
 
-  if ("IntersectionObserver" in window && !prefersReducedMotion) {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
-    );
-    revealEls.forEach(function (el) {
-      observer.observe(el);
+    // Hero: media drifts slower than scroll, copy drifts opposite,
+    // a real parallax handoff rather than a static banner.
+    var heroMedia = document.querySelector(".hero__media img, .hero__media video");
+    var heroCopy = document.querySelector(".hero__copy");
+    if (heroMedia) {
+      gsap.to(heroMedia, {
+        yPercent: 14,
+        ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
+      });
+    }
+    if (heroCopy) {
+      gsap.to(heroCopy, {
+        yPercent: -18,
+        opacity: 0.4,
+        ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
+      });
+    }
+
+    // Images, video and webfonts can finish loading after triggers are
+    // created and shift the layout underneath them, so recalculate once
+    // everything has actually settled.
+    window.addEventListener("load", function () {
+      ScrollTrigger.refresh();
     });
-  } else {
-    revealEls.forEach(function (el) {
-      el.classList.add("is-visible");
-    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        ScrollTrigger.refresh();
+      });
+    }
   }
 
   // Mouse-tracked card tilt
