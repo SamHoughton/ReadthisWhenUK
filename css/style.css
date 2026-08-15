@@ -10,7 +10,7 @@
   --cream-card: #fbf6e9;
 
   --ink: #241019;
-  --ink-soft: #5c4a52;
+  --ink-soft: #453640;
   --ink-faint: rgba(36, 16, 25, 0.55);
 
   --burgundy: #7a1030;
@@ -485,22 +485,16 @@ em {
 }
 .hero__copy {
   width: min(520px, 100%);
-  padding: 2.2rem 2.6rem 2.2rem 1.8rem;
-  margin-left: -1.8rem;
-  background: radial-gradient(
-    ellipse 130% 110% at 30% 50%,
-    rgba(20, 12, 8, 0.58) 0%,
-    rgba(20, 12, 8, 0.4) 45%,
-    rgba(20, 12, 8, 0.12) 72%,
-    transparent 88%
-  );
 }
 .hero__title.hero__title--dark {
   color: var(--cream);
-  text-shadow: 0 1px 3px rgba(23, 13, 8, 0.85), 0 2px 20px rgba(36, 16, 25, 0.55);
+  text-shadow: 0 2px 4px rgba(15, 8, 5, 0.9), 0 1px 2px rgba(15, 8, 5, 0.9),
+    0 4px 28px rgba(15, 8, 5, 0.65);
 }
 .hero__title.hero__title--dark em {
-  color: var(--lilac);
+  color: #e8a06c;
+  text-shadow: 0 2px 4px rgba(15, 8, 5, 0.9), 0 1px 2px rgba(15, 8, 5, 0.9),
+    0 4px 28px rgba(15, 8, 5, 0.65);
 }
 
 .hero__title {
@@ -517,7 +511,8 @@ em {
 .hero__lede {
   font-size: 1.04rem;
   color: var(--cream);
-  text-shadow: 0 1px 2px rgba(23, 13, 8, 0.85), 0 1px 16px rgba(36, 16, 25, 0.5);
+  text-shadow: 0 1px 3px rgba(15, 8, 5, 0.9), 0 1px 2px rgba(15, 8, 5, 0.85),
+    0 3px 20px rgba(15, 8, 5, 0.6);
   max-width: 42ch;
   margin: 0 0 2rem;
 }
@@ -525,7 +520,8 @@ em {
 .hero__copy .eyebrow--dark {
   color: var(--cream);
   font-weight: 800;
-  text-shadow: 0 1px 2px rgba(23, 13, 8, 0.85), 0 1px 12px rgba(36, 16, 25, 0.5);
+  text-shadow: 0 1px 3px rgba(15, 8, 5, 0.9), 0 1px 2px rgba(15, 8, 5, 0.85),
+    0 2px 14px rgba(15, 8, 5, 0.6);
 }
 
 .hero__actions {
@@ -751,9 +747,9 @@ em {
 
 .process-prose {
   max-width: 52ch;
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
-  line-height: 1.5;
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
   color: var(--ink);
 }
 .process-prose p {
@@ -771,8 +767,10 @@ em {
   border-top: 1px solid var(--line);
 }
 .subhead {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  color: var(--ink-soft);
   max-width: 42ch;
   margin: 0 0 2.5rem;
 }
