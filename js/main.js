@@ -51,6 +51,85 @@
     });
   }
 
+  // Custom cursor (fine pointers only)
+  if (window.matchMedia("(pointer: fine) and (hover: hover)").matches) {
+    var dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    var ring = document.createElement("div");
+    ring.className = "cursor-ring";
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    document.documentElement.classList.add("has-cursor");
+
+    var ringX = 0,
+      ringY = 0,
+      targetX = 0,
+      targetY = 0;
+
+    window.addEventListener("mousemove", function (e) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      dot.style.left = targetX + "px";
+      dot.style.top = targetY + "px";
+    });
+
+    function tickRing() {
+      ringX += (targetX - ringX) * 0.18;
+      ringY += (targetY - ringY) * 0.18;
+      ring.style.left = ringX + "px";
+      ring.style.top = ringY + "px";
+      requestAnimationFrame(tickRing);
+    }
+    requestAnimationFrame(tickRing);
+
+    var hoverTargets = "a, button, input, textarea, select, label, [data-tilt]";
+    document.addEventListener("mouseover", function (e) {
+      if (e.target.closest(hoverTargets)) {
+        document.documentElement.classList.add("cursor-hover");
+      }
+    });
+    document.addEventListener("mouseout", function (e) {
+      if (e.target.closest(hoverTargets)) {
+        document.documentElement.classList.remove("cursor-hover");
+      }
+    });
+  }
+
+  // Mouse-tracked card tilt
+  if (
+    window.matchMedia("(pointer: fine) and (hover: hover)").matches &&
+    !prefersReducedMotion
+  ) {
+    document.querySelectorAll("[data-tilt]").forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        var rx = (px - 0.5) * 14;
+        var ry = (0.5 - py) * 14;
+        card.style.setProperty("--rx", rx.toFixed(2) + "deg");
+        card.style.setProperty("--ry", ry.toFixed(2) + "deg");
+      });
+      card.addEventListener("mouseleave", function () {
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+      });
+    });
+  }
+
+  // Ink-stamp press effect on buttons
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      btn.classList.remove("is-stamping");
+      // force reflow so the animation can restart
+      void btn.offsetWidth;
+      btn.classList.add("is-stamping");
+      setTimeout(function () {
+        btn.classList.remove("is-stamping");
+      }, 500);
+    });
+  });
+
   // Pre-fill the "which option" field when a pricing/business CTA is clicked
   var planField = document.getElementById("f-plan");
   document.querySelectorAll("[data-plan]").forEach(function (link) {
