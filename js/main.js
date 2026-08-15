@@ -51,50 +51,6 @@
     });
   }
 
-  // Custom cursor (fine pointers only)
-  if (window.matchMedia("(pointer: fine) and (hover: hover)").matches) {
-    var dot = document.createElement("div");
-    dot.className = "cursor-dot";
-    var ring = document.createElement("div");
-    ring.className = "cursor-ring";
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
-    document.documentElement.classList.add("has-cursor");
-
-    var ringX = 0,
-      ringY = 0,
-      targetX = 0,
-      targetY = 0;
-
-    window.addEventListener("mousemove", function (e) {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      dot.style.left = targetX + "px";
-      dot.style.top = targetY + "px";
-    });
-
-    function tickRing() {
-      ringX += (targetX - ringX) * 0.18;
-      ringY += (targetY - ringY) * 0.18;
-      ring.style.left = ringX + "px";
-      ring.style.top = ringY + "px";
-      requestAnimationFrame(tickRing);
-    }
-    requestAnimationFrame(tickRing);
-
-    var hoverTargets = "a, button, input, textarea, select, label, [data-tilt]";
-    document.addEventListener("mouseover", function (e) {
-      if (e.target.closest(hoverTargets)) {
-        document.documentElement.classList.add("cursor-hover");
-      }
-    });
-    document.addEventListener("mouseout", function (e) {
-      if (e.target.closest(hoverTargets)) {
-        document.documentElement.classList.remove("cursor-hover");
-      }
-    });
-  }
-
   // Mouse-tracked card tilt
   if (
     window.matchMedia("(pointer: fine) and (hover: hover)").matches &&
@@ -148,6 +104,15 @@
     });
   });
 
+  // Pre-fill the message when a "contents" (moment) row is clicked
+  var messageField = document.getElementById("f-message");
+  document.querySelectorAll("[data-moment]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      if (!messageField || messageField.value.trim()) return;
+      messageField.value = "A box for when " + link.getAttribute("data-moment") + ": ";
+    });
+  });
+
   // Netlify form: progressive-enhancement AJAX submit
   var form = document.getElementById("enquiry-form");
   if (form) {
@@ -187,7 +152,7 @@
             submitBtn.textContent = "Send";
           }
           alert(
-            "Something went wrong sending that — please email hello@readthiswhen.co.uk instead."
+            "Something went wrong sending that. Please email hello@readthiswhen.co.uk instead."
           );
         });
     });
