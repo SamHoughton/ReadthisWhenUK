@@ -501,7 +501,7 @@ em {
   align-items: center;
 }
 .hero__copy {
-  width: min(820px, 64vw);
+  width: min(420px, 34vw);
 }
 .hero__title.hero__title--dark {
   color: var(--cream);
@@ -517,9 +517,9 @@ em {
 .hero__title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
-  line-height: 1.08;
-  margin: 0 0 1.6rem;
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+  line-height: 1.16;
+  margin: 0 0 1.4rem;
 }
 .hero__title em {
   color: var(--burgundy);
