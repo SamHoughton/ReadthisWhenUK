@@ -251,6 +251,16 @@ em {
   background: var(--ink);
   color: var(--cream);
 }
+.hero .btn--outline {
+  color: var(--cream);
+  border-color: rgba(247, 240, 220, 0.7);
+  text-shadow: 0 1px 2px rgba(23, 13, 8, 0.6);
+}
+.hero .btn--outline:hover {
+  background: var(--cream);
+  color: var(--ink);
+  text-shadow: none;
+}
 
 .btn--outline-block {
   width: 100%;
@@ -487,7 +497,7 @@ em {
 }
 .hero__title.hero__title--dark {
   color: var(--cream);
-  text-shadow: 0 2px 20px rgba(36, 16, 25, 0.55);
+  text-shadow: 0 1px 3px rgba(23, 13, 8, 0.85), 0 2px 20px rgba(36, 16, 25, 0.55);
 }
 .hero__title.hero__title--dark em {
   color: var(--lilac);
@@ -507,13 +517,13 @@ em {
 .hero__lede {
   font-size: 1.04rem;
   color: rgba(247, 240, 220, 0.92);
-  text-shadow: 0 1px 16px rgba(36, 16, 25, 0.5);
+  text-shadow: 0 1px 2px rgba(23, 13, 8, 0.8), 0 1px 16px rgba(36, 16, 25, 0.5);
   max-width: 42ch;
   margin: 0 0 2rem;
 }
 
 .hero__copy .eyebrow--dark {
-  text-shadow: 0 1px 12px rgba(36, 16, 25, 0.5);
+  text-shadow: 0 1px 2px rgba(23, 13, 8, 0.8), 0 1px 12px rgba(36, 16, 25, 0.5);
 }
 
 .hero__actions {
@@ -553,6 +563,15 @@ em {
     color: var(--burgundy);
     text-shadow: none;
   }
+  .hero .btn--outline {
+    color: var(--ink);
+    border-color: currentColor;
+    text-shadow: none;
+  }
+  .hero .btn--outline:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
 }
 
 .hero__strapline {
@@ -573,46 +592,41 @@ em {
 
 .chapter__art {
   aspect-ratio: 4 / 5;
-  border: 1px solid var(--line);
-  background: linear-gradient(155deg, var(--cream-deep), var(--cream) 70%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem 0;
   position: relative;
   overflow: hidden;
-}
-.chapter__art-placeholder {
-  text-align: center;
-  padding: 2rem;
-}
-.chapter__art-label {
-  display: block;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.66rem;
-  font-weight: 700;
-  color: var(--burgundy);
-  margin-bottom: 0.9em;
-}
-.chapter__art-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.5rem;
-  color: var(--ink-faint);
-  line-height: 1.28;
+  margin: 2rem 0;
 }
 .chapter__art--portrait {
   transform: rotate(-1deg);
   box-shadow: 0 18px 34px -22px rgba(36, 16, 25, 0.35);
 }
-.chapter__art--full {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  margin: 0 0 clamp(2.5rem, 6vw, 4rem);
-  border-inline: none;
-  border-top: none;
+.chapter__art--quote {
+  background: var(--dark-surface);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  padding: clamp(2rem, 5vw, 3rem);
+  border: none;
+  cursor: default;
+}
+.chapter__art--quote::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.4rem;
+  left: 1rem;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--burgundy);
+  opacity: 0.55;
+}
+.chapter__art--quote p {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  line-height: 1.42;
+  margin: 0;
 }
 
 /* ---------------- Every box begins with a moment ---------------- */
@@ -713,35 +727,6 @@ em {
   font-size: 1.05rem;
   max-width: 60ch;
   margin: 0 0 2rem;
-}
-
-.pull-quote {
-  grid-column: 1 / -1;
-  width: min(440px, 100%);
-  margin: 0 0 0 28%;
-  padding: 1.6rem 1.8rem;
-  background: var(--cream-deep);
-  border-left: 3px solid var(--burgundy);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.4;
-  position: relative;
-  box-shadow: 0 20px 34px -22px rgba(36, 16, 25, 0.35);
-}
-@media (min-width: 981px) {
-  .pull-quote {
-    margin-top: -4.5rem;
-  }
-}
-.pull-quote::after {
-  content: "";
-  position: absolute;
-  right: 1.4rem;
-  bottom: -0.6rem;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
-  color: var(--burgundy);
 }
 
 /* ---------------- How it works: postal route ---------------- */
@@ -1029,10 +1014,6 @@ em {
   }
   .chapter__art--portrait {
     max-width: 320px;
-  }
-  .pull-quote {
-    margin-left: 0;
-    width: 100%;
   }
   .toc__title {
     white-space: normal;

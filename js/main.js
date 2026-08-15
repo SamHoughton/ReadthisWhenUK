@@ -9,9 +9,10 @@
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
   // Smooth scroll (Lenis), wired into GSAP's ticker so ScrollTrigger
-  // stays in sync with it rather than fighting native scroll.
+  // stays in sync with it rather than fighting native scroll. Duration
+  // kept low so trackpad input still feels direct rather than laggy.
   if (hasGsap && typeof window.Lenis !== "undefined" && !prefersReducedMotion) {
-    var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    var lenis = new Lenis({ duration: 0.7, smoothWheel: true });
     window.lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(function (time) {
