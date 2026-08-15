@@ -330,6 +330,7 @@ em {
 }
 .section-title em {
   color: var(--burgundy);
+  font-style: normal;
 }
 
 /* ---------------- Header ---------------- */
@@ -510,6 +511,7 @@ em {
 }
 .hero__title.hero__title--dark em {
   color: #e8a06c;
+  font-style: normal;
   text-shadow: 0 2px 4px rgba(15, 8, 5, 0.9), 0 1px 2px rgba(15, 8, 5, 0.9),
     0 4px 28px rgba(15, 8, 5, 0.65);
 }
@@ -523,6 +525,7 @@ em {
 }
 .hero__title em {
   color: var(--burgundy);
+  font-style: normal;
 }
 
 .hero__lede {
@@ -671,11 +674,12 @@ em {
 }
 .band__title em {
   color: var(--burgundy);
+  font-style: normal;
 }
 
 .band__closer {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
   color: var(--ink-soft);
   margin: 1.5rem 0 0;
 }
@@ -710,9 +714,8 @@ em {
   flex-shrink: 0;
 }
 .toc__title {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -773,9 +776,9 @@ em {
 
 .process-prose {
   max-width: 52ch;
-  font-family: var(--font-body);
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  line-height: 1.6;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  line-height: 1.55;
   color: var(--ink);
 }
 .process-prose p {
@@ -793,15 +796,15 @@ em {
   border-top: 1px solid var(--line);
 }
 .subhead {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem);
   color: var(--ink-soft);
   max-width: 42ch;
   margin: 0 0 2.5rem;
 }
 .subhead em {
   color: var(--burgundy);
+  font-style: normal;
 }
 
 .price-list {
@@ -889,6 +892,7 @@ em {
 }
 .closer__title em {
   color: var(--burgundy);
+  font-style: normal;
 }
 .closer__lede {
   font-size: 1.15rem;
@@ -970,9 +974,8 @@ em {
   padding: 1.5rem 0;
 }
 .enquiry__success p {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
   margin: 0;
 }
 .wax-seal--drop {
