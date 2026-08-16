@@ -994,6 +994,26 @@ em {
   padding-top: 0;
   text-align: center;
 }
+
+.closer-pen {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .closer__inner {
+    position: relative;
+    padding-right: calc(clamp(260px, 20vw, 380px) + 40px);
+  }
+  .closer-pen {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    width: clamp(260px, 20vw, 380px);
+    height: auto;
+  }
+}
 .closer__title {
   font-family: var(--font-display);
   font-weight: 400;

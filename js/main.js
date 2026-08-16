@@ -199,6 +199,7 @@
 
   var parcelsImg = document.querySelector(".pricing-parcels");
   var aliceVignetteImg = document.querySelector(".alice-vignette");
+  var closerPenImg = document.querySelector(".closer-pen");
 
   initAccentImage(document.querySelector(".how-it-works-seal"));
   initAccentImage(document.querySelector(".moments-sprig"));
@@ -208,6 +209,9 @@
   });
   initAccentImage(aliceVignetteImg, function () {
     startAccentDrift(aliceVignetteImg, document.querySelector(".alice__inner"), 26);
+  });
+  initAccentImage(closerPenImg, function () {
+    startAccentDrift(closerPenImg, document.querySelector(".closer__inner"), 26);
   });
 
   // Ink-stamp press effect on buttons
