@@ -9,16 +9,37 @@
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
   // Smooth scroll (Lenis), wired into GSAP's ticker so ScrollTrigger
-  // stays in sync with it rather than fighting native scroll. Duration
-  // kept low so trackpad input still feels direct rather than laggy.
+  // stays in sync with it rather than fighting native scroll. lerp-only
+  // (no duration): duration-based easing is tied to Lenis's own elapsed-
+  // time tracking, which doesn't play well with being driven by an
+  // external ticker's time value the way lerp's simple per-frame
+  // interpolation does.
   if (hasGsap && typeof window.Lenis !== "undefined" && !prefersReducedMotion) {
-    var lenis = new Lenis({ duration: 0.7, smoothWheel: true });
+    var lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     window.lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(function (time) {
       lenis.raf(time * 1000);
     });
     gsap.ticker.lagSmoothing(0);
+
+    // scroll-behavior: smooth was removed from the stylesheet (it fights
+    // Lenis for control of scroll position), so in-page anchor links need
+    // to go through Lenis directly to keep easing on navigation.
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var id = link.getAttribute("href");
+        if (!id || id.length < 2) return;
+        var target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        lenis.scrollTo(target);
+        // Update the URL without the native hash-jump this would otherwise
+        // trigger now that scroll-behavior: smooth is gone, which would
+        // yank the page straight to the target and fight the Lenis ease.
+        if (history.pushState) history.pushState(null, "", id);
+      });
+    });
   }
 
   // Footer year

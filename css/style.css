@@ -46,7 +46,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scrollbar-color: var(--burgundy) var(--cream);
   scrollbar-width: thin;
 }
