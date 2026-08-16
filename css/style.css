@@ -1029,6 +1029,11 @@ em {
   font-family: var(--font-display);
   font-size: 1.2rem;
   color: var(--ink-soft);
+  margin: 0 0 1.2rem;
+}
+.closer__guide-link {
+  font-size: 0.92rem;
+  color: var(--ink-faint);
   margin: 0 0 3rem;
 }
 
@@ -1315,5 +1320,399 @@ em {
   }
   .price-list__head {
     flex-wrap: wrap;
+  }
+}
+
+/* ---------------- Box builder (/start) ----------------
+   Scoped under .builder wherever the class name would otherwise
+   collide with an existing site rule (.field, .btn, .nav) so this
+   page and the homepage can safely share this stylesheet. */
+
+.builder-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: clamp(20px, 5vw, 48px) clamp(20px, 5vw, 48px) 0;
+}
+.builder-top .logo {
+  color: var(--ink);
+  text-shadow: none;
+}
+.builder-top .logo__word {
+  font-size: 1.3rem;
+}
+
+.builder {
+  font-weight: 300;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 72px) clamp(20px, 5vw, 48px) 96px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vw, 64px);
+}
+@media (min-width: 920px) {
+  .builder {
+    grid-template-columns: 1fr 340px;
+    align-items: start;
+  }
+}
+
+/* progress: stitched thread */
+.builder .progress {
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.builder .progress__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+.builder .progress__track {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.builder .progress__seg {
+  height: 2px;
+  flex: 1;
+  background: var(--line);
+  transition: background 0.5s var(--ease);
+}
+.builder .progress__seg.is-done {
+  background: var(--burgundy);
+}
+
+/* steps */
+.builder .step {
+  display: none;
+}
+.builder .step.is-active {
+  display: block;
+  animation: builderRise 0.5s var(--ease) both;
+}
+@keyframes builderRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.builder .step__q {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+.builder .step__q em {
+  font-style: italic;
+  color: var(--burgundy);
+}
+.builder .step__hint {
+  font-size: 15px;
+  color: var(--ink-faint);
+  margin: 0 0 28px;
+  max-width: 46ch;
+  line-height: 1.6;
+}
+
+/* options */
+.builder .opts {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+  margin-bottom: 32px;
+}
+@media (min-width: 600px) {
+  .builder .opts--two {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.builder .opt {
+  position: relative;
+  text-align: left;
+  cursor: pointer;
+  background: var(--cream-card);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 16px 46px 16px 18px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink);
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.builder .opt:hover {
+  border-color: rgba(122, 16, 48, 0.4);
+  transform: translateX(3px);
+}
+.builder .opt__t {
+  display: block;
+}
+.builder .opt__sub {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.builder .opt__price {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--burgundy);
+  margin-top: 6px;
+  display: block;
+}
+.builder .opt[aria-pressed="true"] {
+  border-color: var(--burgundy);
+  background: #fff;
+  box-shadow: inset 3px 0 0 var(--burgundy);
+}
+.builder .opt::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.3);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.builder .opt[aria-pressed="true"]::after {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+.builder .opt:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
+/* fields (scoped: the homepage already has its own .field) */
+.builder .field {
+  margin-bottom: 20px;
+}
+.builder .field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 7px;
+}
+.builder .field input,
+.builder .field textarea {
+  width: 100%;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 12px 13px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink);
+  transition: border-color 0.25s var(--ease);
+}
+.builder .field input:focus,
+.builder .field textarea:focus {
+  outline: none;
+  border-color: var(--burgundy);
+}
+.builder .field textarea {
+  min-height: 104px;
+  resize: vertical;
+}
+.builder .grid2 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) {
+  .builder .grid2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* step nav (scoped: the homepage already has its own .nav) */
+.builder .nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.builder .btn {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 12px 26px;
+  border: 1px solid transparent;
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.builder .btn:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+.builder .btn--go {
+  background: var(--burgundy);
+  color: var(--cream);
+}
+.builder .btn--go:hover {
+  background: var(--burgundy-dark);
+  transform: translateY(-1px);
+}
+.builder .btn--go[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+.builder .btn--ghost {
+  background: none;
+  color: var(--ink-faint);
+  border-color: var(--line);
+}
+.builder .btn--ghost:hover {
+  color: var(--ink);
+  border-color: var(--ink-faint);
+}
+.builder .btn--text {
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 12px 0;
+  font-size: 13px;
+}
+.builder .btn--text:hover {
+  color: var(--burgundy);
+}
+
+/* the note */
+.builder .note {
+  position: sticky;
+  top: 32px;
+}
+.builder .note__paper {
+  background: var(--cream-card);
+  border: 1px solid var(--line);
+  padding: 28px 26px 32px;
+  box-shadow: 0 1px 0 var(--cream-deep), 0 14px 30px -22px rgba(36, 16, 25, 0.5);
+  transform: rotate(-0.5deg);
+  min-height: 300px;
+}
+.builder .note__cap {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 18px;
+}
+.builder .note__body {
+  font-family: var(--font-hand);
+  font-size: 23px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.builder .note__body p {
+  margin: 0 0 9px;
+}
+.builder .note__ph {
+  color: rgba(36, 16, 25, 0.24);
+}
+.builder .note__line {
+  animation: builderInk 0.55s var(--ease) both;
+}
+@keyframes builderInk {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.builder .note__sign {
+  margin-top: 22px;
+  font-family: var(--font-hand);
+  font-size: 20px;
+  color: var(--ink-faint);
+}
+
+/* done */
+.builder .done {
+  display: none;
+  text-align: center;
+  padding: 40px 0;
+}
+.builder .done.is-active {
+  display: block;
+  animation: builderRise 0.6s var(--ease) both;
+}
+.builder .done__seal {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  color: var(--cream);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 22px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 22px;
+  box-shadow: 0 6px 18px -8px rgba(88, 9, 31, 0.9);
+}
+.builder .done h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(26px, 3.4vw, 36px);
+  margin: 0 0 10px;
+}
+.builder .done p {
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+/* mobile: keep the note visible near the top instead of buried below
+   every question, since it's the live preview of what's being sent */
+@media (max-width: 919px) {
+  .builder .note {
+    position: static;
+    order: -1;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .builder * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .builder .opt:hover {
+    transform: none;
+  }
+  .builder .note__paper {
+    transform: none;
   }
 }

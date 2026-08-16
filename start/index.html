@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start a box: Read This When</title>
+<meta name="description" content="Answer a few quick questions and I'll help you choose the right box, or tell me exactly what you already have in mind.">
+
+<meta property="og:title" content="Start a box: Read This When">
+<meta property="og:description" content="Answer a few quick questions and I'll help you choose the right box.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2317120E'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' fill='%23F2E9DC' text-anchor='middle'%3ER%C2%B7T%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#builder-main">Skip to content</a>
+
+<div class="builder-top">
+  <a class="logo" href="/">
+    <span class="logo__word">Read This When</span>
+  </a>
+  <a class="btn--text" href="/#start">I already know what I want</a>
+</div>
+
+<form class="builder" name="box-builder" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="box-builder">
+  <p class="hp-field" aria-hidden="true">
+    <label>Leave this field blank: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+  </p>
+
+  <!-- Netlify Forms detects fields at build time by scanning the static
+       HTML, so every field the JS will populate has to exist here from
+       the start -- none of these are created dynamically. -->
+  <input type="hidden" name="recipient" id="d-recipient">
+  <input type="hidden" name="moment" id="d-moment">
+  <input type="hidden" name="need" id="d-need">
+  <input type="hidden" name="reader" id="d-reader">
+  <input type="hidden" name="tier" id="d-tier">
+  <input type="hidden" name="timing" id="d-timing">
+  <input type="hidden" name="note-summary" id="d-summary">
+
+  <div class="builder__main" id="builder-main">
+
+    <div class="progress">
+      <div class="progress__label" id="pLabel">Question 1 of 6</div>
+      <div class="progress__track" id="pTrack"></div>
+    </div>
+
+    <!-- 1 -->
+    <section class="step is-active" data-step="0">
+      <h2 class="step__q">Who is the box <em>for</em>?</h2>
+      <p class="step__hint">Start with the person. Everything else follows from them.</p>
+      <div class="opts opts--two" data-key="recipient">
+        <button type="button" class="opt" aria-pressed="false" data-v="my partner" data-note="a box for my partner">My partner</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="a friend" data-note="a box for a friend">A friend</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="family" data-note="a box for someone in my family">Family</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="someone at work" data-note="a box for someone I work with">Someone at work</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="my child" data-note="a box for my child">My child</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="myself" data-note="a box for myself">Myself</button>
+      </div>
+      <div class="nav"><button type="button" class="btn btn--go" data-next disabled>Next</button></div>
+    </section>
+
+    <!-- 2 -->
+    <section class="step" data-step="1">
+      <h2 class="step__q">What's the <em>moment</em>?</h2>
+      <p class="step__hint">Not the date on the calendar. The thing they're actually in.</p>
+      <div class="opts" data-key="moment">
+        <button type="button" class="opt" aria-pressed="false" data-v="a new baby arrives" data-note="A new baby has arrived.">A new baby arrives</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="a big birthday lands" data-note="A big birthday is landing.">A big birthday lands</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="a chapter ends" data-note="A chapter is ending.">A chapter ends</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="a heart is breaking" data-note="A heart is breaking.">A heart is breaking</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="a fresh start begins" data-note="A fresh start is beginning.">A fresh start begins</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="someone needs to feel seen" data-note="They need to feel seen.">Someone needs to feel seen</button>
+      </div>
+      <div class="nav">
+        <button type="button" class="btn btn--go" data-next disabled>Next</button>
+        <button type="button" class="btn btn--ghost" data-back>Back</button>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="step" data-step="2">
+      <h2 class="step__q">What do they need <em>right now</em>?</h2>
+      <p class="step__hint">If you're not sure, pick the one you'd want in their place.</p>
+      <div class="opts opts--two" data-key="need">
+        <button type="button" class="opt" aria-pressed="false" data-v="comfort" data-note="Mostly they need comfort.">Comfort</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="escape" data-note="Mostly they need somewhere else to be.">Somewhere else to be</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="to feel understood" data-note="Mostly they need to feel understood.">To feel understood</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="a laugh" data-note="Mostly they need a laugh.">A laugh</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="courage" data-note="Mostly they need some courage.">Courage</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="quiet" data-note="Mostly they need something quiet.">Something quiet</button>
+      </div>
+      <div class="nav">
+        <button type="button" class="btn btn--go" data-next disabled>Next</button>
+        <button type="button" class="btn btn--ghost" data-back>Back</button>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="step" data-step="3">
+      <h2 class="step__q">How do they <em>read</em>?</h2>
+      <p class="step__hint">This changes what lands. "No idea" is a perfectly good answer.</p>
+      <div class="opts" data-key="reader">
+        <button type="button" class="opt" aria-pressed="false" data-v="devours everything" data-note="They read constantly.">They devour everything</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="reads slowly" data-note="They read slowly, a few pages at a time.">They read slowly, a few pages at a time</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="out of the habit" data-note="They've fallen out of the habit.">They've fallen out of the habit</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="true stories only" data-note="They only really read true stories.">Only true stories</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="no idea" data-note="I honestly don't know what they read.">I honestly don't know</button>
+      </div>
+      <div class="nav">
+        <button type="button" class="btn btn--go" data-next disabled>Next</button>
+        <button type="button" class="btn btn--ghost" data-back>Back</button>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="step" data-step="4">
+      <h2 class="step__q">How much should <em>I</em> do?</h2>
+      <p class="step__hint">Every box is hand-picked. This is about how far I go.</p>
+      <div class="opts" data-key="tier">
+        <button type="button" class="opt" aria-pressed="false" data-v="Curated Collection" data-note="I'd like the Curated Collection.">
+          <span class="opt__t">Curated Collection</span>
+          <span class="opt__sub">Pick a moment, I'll choose from my own shelves. Handwritten note with each book.</span>
+          <span class="opt__price">£89 / 3 books</span>
+        </button>
+        <button type="button" class="opt" aria-pressed="false" data-v="Chosen for Them" data-note="I'd like you to choose for them.">
+          <span class="opt__t">Chosen for Them</span>
+          <span class="opt__sub">Tell me about the person too, and I'll tailor every pick, with notes in your words.</span>
+          <span class="opt__price">£130 / 3 books</span>
+        </button>
+        <button type="button" class="opt" aria-pressed="false" data-v="Entirely Bespoke" data-note="I'd like something entirely bespoke.">
+          <span class="opt__t">Entirely Bespoke</span>
+          <span class="opt__sub">A full brief and reading history. Hand-selected, never repeated.</span>
+          <span class="opt__price">from £180</span>
+        </button>
+        <button type="button" class="opt" aria-pressed="false" data-v="not sure yet" data-note="I'm not sure which option yet.">
+          <span class="opt__t">I'm not sure yet</span>
+          <span class="opt__sub">Tell me what you're thinking and I'll suggest one.</span>
+        </button>
+      </div>
+      <div class="nav">
+        <button type="button" class="btn btn--go" data-next disabled>Next</button>
+        <button type="button" class="btn btn--ghost" data-back>Back</button>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="step" data-step="5">
+      <h2 class="step__q">When should it <em>land</em>?</h2>
+      <p class="step__hint">Boxes are labelled for the moment they're meant to be opened.</p>
+      <div class="opts opts--two" data-key="timing">
+        <button type="button" class="opt" aria-pressed="false" data-v="as soon as possible" data-note="It should land as soon as possible.">As soon as possible</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="within a fortnight" data-note="It should land within a fortnight.">Within a fortnight</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="a specific date" data-note="It needs to land on a particular date.">There's a date it must hit</button>
+        <button type="button" class="opt" aria-pressed="false" data-v="no rush" data-note="There's no rush.">No rush at all</button>
+      </div>
+      <div class="nav">
+        <button type="button" class="btn btn--go" data-next disabled>Next</button>
+        <button type="button" class="btn btn--ghost" data-back>Back</button>
+      </div>
+    </section>
+
+    <!-- details -->
+    <section class="step" data-step="6">
+      <h2 class="step__q">Where do I <em>send</em> it?</h2>
+      <p class="step__hint">Last bit. Anything you add here goes straight to me with your note.</p>
+      <div class="grid2">
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Your email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-more">Anything else I should know</label>
+        <textarea id="f-more" name="message" placeholder="A date, a book they loved, something they'd hate. Whatever helps."></textarea>
+      </div>
+      <div class="nav">
+        <button type="submit" class="btn btn--go">Send this to Alice</button>
+        <button type="button" class="btn btn--ghost" data-back>Back</button>
+      </div>
+    </section>
+
+    <div class="done" id="done">
+      <div class="done__seal">RW</div>
+      <h2>Sealed and sent.</h2>
+      <p>I'll be in touch shortly. x</p>
+    </div>
+
+  </div>
+
+  <aside class="note" aria-live="polite">
+    <div class="note__paper">
+      <div class="note__cap">Your note, so far</div>
+      <div class="note__body" id="noteBody">
+        <p>Dear Alice,</p>
+        <p class="note__ph" id="notePh">I'd like to send someone a box&hellip;</p>
+      </div>
+      <div class="note__sign" id="noteSign" hidden>&mdash; with thanks</div>
+    </div>
+  </aside>
+
+</form>
+
+<script src="/js/box-builder.js"></script>
+</body>
+</html>
