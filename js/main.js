@@ -113,6 +113,75 @@
     }
   }
 
+  // Decorative accent images (pricing parcels, how-it-works seal): fade in
+  // once on scroll into view. Left fully visible and static if the user
+  // prefers reduced motion or IntersectionObserver isn't available.
+  var initAccentImage = function (el, onRevealed) {
+    if (!el || prefersReducedMotion || typeof IntersectionObserver === "undefined") {
+      return;
+    }
+    el.style.opacity = "0";
+    el.style.transform = "translateY(12px)";
+    el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0px)";
+          observer.unobserve(el);
+
+          if (onRevealed) {
+            var handleSettled = function (e) {
+              if (e.propertyName !== "transform") return;
+              el.removeEventListener("transitionend", handleSettled);
+              // Drop the transform transition so the rAF-driven parallax
+              // below tracks scroll directly, instead of easing toward it.
+              el.style.transition = "opacity 0.6s ease-out";
+              onRevealed();
+            };
+            el.addEventListener("transitionend", handleSettled);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+  };
+
+  // Parcels image drifts a little further once revealed, tied to how far
+  // the pricing section has scrolled through the viewport.
+  var startParcelsDrift = function () {
+    var parcelsImg = document.querySelector(".pricing-parcels");
+    var section = document.querySelector(".pricing-block");
+    if (!parcelsImg || !section) return;
+
+    var driftRange = 26;
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var rect = section.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var total = rect.height + vh;
+      var progress = total > 0 ? (vh - rect.top) / total : 0;
+      progress = Math.min(1, Math.max(0, progress));
+      var offset = (progress - 0.5) * driftRange;
+      parcelsImg.style.transform = "translateY(" + offset.toFixed(2) + "px)";
+    };
+    var onScroll = function () {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+  };
+
+  initAccentImage(document.querySelector(".how-it-works-seal"));
+  initAccentImage(document.querySelector(".pricing-parcels"), startParcelsDrift);
+
   // Ink-stamp press effect on buttons
   document.querySelectorAll(".btn").forEach(function (btn) {
     btn.addEventListener("click", function () {

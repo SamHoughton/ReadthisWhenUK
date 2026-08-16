@@ -851,6 +851,42 @@ em {
   margin: 0 0 1rem;
 }
 
+/* ---------------- Decorative accent images (wide-screen only) ---------------- */
+
+.pricing-parcels,
+.how-it-works-seal {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .pricing-block {
+    position: relative;
+    padding-right: 240px;
+  }
+  .pricing-parcels {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: auto;
+  }
+
+  .how__inner {
+    position: relative;
+    padding-right: 150px;
+  }
+  .how-it-works-seal {
+    display: block;
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+    width: 110px;
+    height: auto;
+  }
+}
+
 /* ---------------- For business (aside note) ---------------- */
 
 .aside-note {
