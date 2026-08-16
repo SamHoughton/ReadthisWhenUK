@@ -214,6 +214,13 @@
     startAccentDrift(closerPenImg, document.querySelector(".closer__inner"), 26);
   });
 
+  // Journey sequence: each scene fades up independently as it's scrolled
+  // to, same mechanism as the single accent images above, just called
+  // once per frame instead of once per section.
+  document.querySelectorAll(".journey__frame").forEach(function (frame) {
+    initAccentImage(frame);
+  });
+
   // Ink-stamp press effect on buttons
   document.querySelectorAll(".btn").forEach(function (btn) {
     btn.addEventListener("click", function () {

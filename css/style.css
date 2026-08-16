@@ -913,7 +913,8 @@ em {
 
 .pricing-parcels,
 .how-it-works-seal,
-.business-plant {
+.business-plant,
+.journey {
   display: none;
   pointer-events: none;
 }
@@ -934,8 +935,32 @@ em {
   }
 
   .how__inner {
+    --journey-w: clamp(180px, 16vw, 280px);
     position: relative;
     padding-left: calc(var(--accent-sm) + 40px);
+    padding-right: calc(var(--journey-w) + 40px);
+    /* .journey is absolutely positioned, so it doesn't otherwise
+       contribute to this container's height -- without this it would
+       visually overlap whatever section comes next. */
+    min-height: calc(4 * (var(--journey-w) * 0.75) + 3 * 2.5rem);
+  }
+  .journey {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--journey-w);
+  }
+  .journey__frame {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 14px 30px -22px rgba(36, 16, 25, 0.5);
   }
   .how-it-works-seal {
     display: block;
