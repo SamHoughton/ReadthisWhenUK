@@ -1088,9 +1088,33 @@ em {
 /* ---------------- Footer ---------------- */
 
 .site-footer {
-  background: var(--dark-surface);
+  background:
+    linear-gradient(
+      to right,
+      rgba(20, 8, 13, 0.5) 0%,
+      rgba(20, 8, 13, 0.5) 6%,
+      transparent 30%,
+      transparent 38%,
+      rgba(20, 8, 13, 0.4) 47%,
+      rgba(20, 8, 13, 0.4) 54%,
+      transparent 64%
+    ),
+    url("../images/footer.png") center / cover no-repeat;
+  background-color: var(--dark-surface);
   color: var(--cream);
-  padding-block: 2.6rem 2.2rem;
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+@media (max-width: 640px) {
+  .site-footer {
+    /* Below this width the footer text stacks into a single left-aligned
+       column instead of spreading left/centre/right, so the two-zone
+       desktop scrim (tuned for that horizontal spread) no longer lines
+       up with where the text actually sits. */
+    background:
+      linear-gradient(to right, rgba(20, 8, 13, 0.55) 0%, rgba(20, 8, 13, 0.55) 55%, transparent 82%),
+      url("../images/footer.png") center / cover no-repeat;
+    background-color: var(--dark-surface);
+  }
 }
 .site-footer__inner {
   display: flex;
