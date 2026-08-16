@@ -132,17 +132,18 @@
           el.style.transform = "translateY(0px)";
           observer.unobserve(el);
 
-          if (onRevealed) {
-            var handleSettled = function (e) {
-              if (e.propertyName !== "transform") return;
-              el.removeEventListener("transitionend", handleSettled);
-              // Drop the transform transition so the rAF-driven parallax
-              // below tracks scroll directly, instead of easing toward it.
-              el.style.transition = "opacity 0.6s ease-out";
-              onRevealed();
-            };
-            el.addEventListener("transitionend", handleSettled);
-          }
+          var handleSettled = function (e) {
+            if (e.propertyName !== "transform") return;
+            el.removeEventListener("transitionend", handleSettled);
+            // Drop the transform transition and inline value so the
+            // rAF-driven parallax (where present) tracks scroll directly
+            // instead of easing toward it, and CSS-only effects like a
+            // hover tilt aren't blocked by a leftover inline transform.
+            el.style.transition = "opacity 0.6s ease-out";
+            el.style.transform = "";
+            if (onRevealed) onRevealed();
+          };
+          el.addEventListener("transitionend", handleSettled);
         });
       },
       { threshold: 0.15 }
