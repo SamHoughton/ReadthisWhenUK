@@ -832,6 +832,15 @@ em {
     position: sticky;
     top: 110px;
   }
+  /* The journey row now sits full-width below this column, extending
+     the section well past how tall the sticky intro's own content is.
+     Staying stuck for that whole extra scroll range meant it could
+     end up visually overlapping the journey images as they scrolled
+     past underneath it, and since they come later in the DOM they
+     painted on top -- the heading appeared to vanish under them. */
+  .how__inner .sticky-col {
+    position: static;
+  }
 }
 
 .process-prose {
