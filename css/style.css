@@ -942,23 +942,35 @@ em {
     /* .journey is absolutely positioned, so it doesn't otherwise
        contribute to this container's height -- without this it would
        visually overlap whatever section comes next. */
-    min-height: calc(4 * (var(--journey-w) * 0.75) + 3 * 2.5rem);
+    min-height: calc(4 * (var(--journey-w) * 0.76 * 0.75) + 3 * 3.2rem);
   }
   .journey {
+    --frame-w: calc(var(--journey-w) * 0.76);
+    --offset: calc(var(--journey-w) * 0.12);
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    align-items: center;
+    gap: 3.2rem;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 8px;
     width: var(--journey-w);
   }
   .journey__frame {
     position: relative;
     display: block;
-    width: 100%;
+    width: var(--frame-w);
     aspect-ratio: 4 / 3;
     box-shadow: 0 14px 30px -22px rgba(36, 16, 25, 0.5);
+  }
+  /* Staggered left/right so the sequence reads as a winding path
+     rather than a rigid column -- that was the actual complaint,
+     the connector alone didn't fix it. */
+  .journey__frame:nth-child(odd) {
+    transform: translateX(var(--offset)) rotate(-1.5deg);
+  }
+  .journey__frame:nth-child(even) {
+    transform: translateX(calc(-1 * var(--offset))) rotate(1.5deg);
   }
   .journey__frame img {
     display: block;
@@ -967,30 +979,42 @@ em {
     object-fit: cover;
     border-radius: 2px;
   }
-  /* A dashed thread joins each frame to the next, so the sequence
-     reads as one journey rather than four unrelated photos -- the
-     same dotted-line device used for the moments-list leaders. */
+  /* A dashed thread joins each frame to the next, angled to actually
+     bridge the zigzag instead of hanging straight down into empty
+     space. Length/angle verified against real rendered positions,
+     not calculated by eye. */
   .journey__frame:not(:last-child)::after {
     content: "";
     position: absolute;
     top: 100%;
     left: 50%;
     width: 0;
-    height: 2.5rem;
-    border-left: 2px dashed rgba(122, 16, 48, 0.45);
-    transform: translateX(-50%);
+    height: 4.6rem;
+    border-left: 2px dashed rgba(122, 16, 48, 0.5);
+    transform-origin: top;
+  }
+  .journey__frame:nth-child(odd):not(:last-child)::after {
+    transform: rotate(-49.8deg);
+  }
+  .journey__frame:nth-child(even):not(:last-child)::after {
+    transform: rotate(49.8deg);
   }
   .journey__frame:not(:first-child)::before {
     content: "";
     position: absolute;
-    top: -0.7rem;
+    top: -0.65rem;
     left: 50%;
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 7px solid rgba(122, 16, 48, 0.7);
-    transform: translateX(-50%);
+  }
+  .journey__frame:nth-child(odd):not(:first-child)::before {
+    transform: translateX(-50%) rotate(-49.8deg);
+  }
+  .journey__frame:nth-child(even):not(:first-child)::before {
+    transform: translateX(-50%) rotate(49.8deg);
   }
   .how-it-works-seal {
     display: block;
