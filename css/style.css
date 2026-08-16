@@ -665,6 +665,26 @@ em {
   align-items: start;
 }
 
+.moments-sprig {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .band__inner {
+    position: relative;
+    padding-left: 115px;
+  }
+  .moments-sprig {
+    display: block;
+    position: absolute;
+    top: 0.2rem;
+    left: 0;
+    width: 95px;
+    height: auto;
+  }
+}
+
 .band__title {
   font-family: var(--font-display);
   font-weight: 400;
@@ -756,6 +776,26 @@ em {
   font-size: 1.05rem;
   max-width: 60ch;
   margin: 0 0 2rem;
+}
+
+.alice-vignette {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .alice__inner {
+    position: relative;
+    padding-right: 230px;
+  }
+  .alice-vignette {
+    display: block;
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    width: 200px;
+    height: auto;
+  }
 }
 
 /* ---------------- How it works: postal route ---------------- */
@@ -854,7 +894,8 @@ em {
 /* ---------------- Decorative accent images (wide-screen only) ---------------- */
 
 .pricing-parcels,
-.how-it-works-seal {
+.how-it-works-seal,
+.business-plant {
   display: none;
   pointer-events: none;
 }
@@ -862,7 +903,7 @@ em {
 @media (min-width: 1024px) {
   .pricing-block {
     position: relative;
-    padding-right: 240px;
+    padding-right: 260px;
   }
   .pricing-parcels {
     display: block;
@@ -883,6 +924,18 @@ em {
     top: 0.25rem;
     right: 0;
     width: 110px;
+    height: auto;
+  }
+
+  .aside-note {
+    position: relative;
+  }
+  .business-plant {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -175px;
+    width: 85px;
     height: auto;
   }
 }
