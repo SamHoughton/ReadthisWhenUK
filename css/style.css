@@ -33,6 +33,9 @@
   --wrap: 1180px;
   --gutter: clamp(20px, 5vw, 64px);
 
+  --accent-lg: clamp(200px, 20vw, 340px);
+  --accent-sm: clamp(110px, 11vw, 170px);
+
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --underline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M0,4 Q10,0 20,4 T40,4 T60,4 T80,4 T100,4' fill='none' stroke='%237A1030' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
   --underline-cream: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M0,4 Q10,0 20,4 T40,4 T60,4 T80,4 T100,4' fill='none' stroke='%23C9CBDF' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -673,14 +676,14 @@ em {
 @media (min-width: 1024px) {
   .band__inner {
     position: relative;
-    padding-left: 115px;
+    padding-left: calc(var(--accent-sm) + 30px);
   }
   .moments-sprig {
     display: block;
     position: absolute;
     top: 0.2rem;
     left: 0;
-    width: 95px;
+    width: var(--accent-sm);
     height: auto;
   }
 }
@@ -786,14 +789,14 @@ em {
 @media (min-width: 1024px) {
   .alice__inner {
     position: relative;
-    padding-right: 230px;
+    padding-right: calc(var(--accent-lg) + 40px);
   }
   .alice-vignette {
     display: block;
     position: absolute;
     top: 3rem;
     right: 0;
-    width: 200px;
+    width: var(--accent-lg);
     height: auto;
   }
 }
@@ -903,39 +906,36 @@ em {
 @media (min-width: 1024px) {
   .pricing-block {
     position: relative;
-    padding-right: 260px;
+    padding-right: calc(var(--accent-lg) + 40px);
   }
   .pricing-parcels {
     display: block;
     position: absolute;
     top: 0;
     right: 0;
-    width: 200px;
+    width: var(--accent-lg);
     height: auto;
   }
 
   .how__inner {
     position: relative;
-    padding-right: 150px;
+    padding-right: calc(var(--accent-sm) + 40px);
   }
   .how-it-works-seal {
     display: block;
     position: absolute;
     top: 0.25rem;
     right: 0;
-    width: 110px;
+    width: var(--accent-sm);
     height: auto;
   }
 
-  .aside-note {
-    position: relative;
-  }
   .business-plant {
     display: block;
     position: absolute;
-    top: 0;
-    right: -175px;
-    width: 85px;
+    bottom: 0;
+    right: 0;
+    width: var(--accent-sm);
     height: auto;
   }
 }
