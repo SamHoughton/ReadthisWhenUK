@@ -957,11 +957,16 @@ em {
     position: relative;
     display: block;
     width: 100%;
-    height: auto;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
     border-radius: 2px;
+    overflow: hidden;
     box-shadow: 0 14px 30px -22px rgba(36, 16, 25, 0.5);
+  }
+  .journey__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   /* A dashed thread joins each frame to the next, so the sequence
      reads as one journey rather than four unrelated photos -- the
