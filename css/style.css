@@ -349,11 +349,27 @@ em {
   z-index: 100;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background-color 0.35s ease, border-color 0.35s ease;
+  transition: background-color 0.35s ease, border-color 0.35s ease,
+    backdrop-filter 0.35s ease;
 }
 .site-header--scrolled {
   background: var(--cream);
   border-bottom-color: var(--line);
+}
+
+/* Frosted glass, layered on top of the plain fills above as a fallback
+   for browsers without backdrop-filter support. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .site-header {
+    background: rgba(36, 16, 25, 0.16);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  .site-header--scrolled {
+    background: rgba(247, 240, 220, 0.72);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
 }
 .site-header__inner {
   display: flex;
