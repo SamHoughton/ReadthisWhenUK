@@ -63,7 +63,7 @@ A genuinely fun, contained thing to build well.
 
 ---
 
-## 4. Homepage note-writing teaser
+## 4. Homepage note-writing teaser — ✅ shipped
 
 **Pitch:** The best trick in `/start` is watching the handwritten note
 assemble itself as you answer questions. Nothing on the homepage does

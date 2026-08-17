@@ -613,6 +613,48 @@ em {
   font-size: 1.02rem;
 }
 
+.note-teaser {
+  display: none;
+}
+@media (min-width: 901px) {
+  .note-teaser {
+    display: block;
+    margin-top: 2.2rem;
+    max-width: 280px;
+    background: var(--cream-card);
+    border: 1px solid var(--line);
+    padding: 1rem 1.15rem 1.2rem;
+    box-shadow: 0 1px 0 var(--cream-deep), 0 14px 30px -22px rgba(15, 8, 5, 0.6);
+    transform: rotate(-1deg);
+  }
+  .note-teaser__cap {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 0.6rem;
+  }
+  .note-teaser__body {
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .note-teaser__body p {
+    margin: 0;
+  }
+  .note-teaser__line {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .note-teaser__line.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (max-width: 900px) {
   .hero__media {
     height: 92vh;

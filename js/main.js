@@ -46,6 +46,41 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Homepage note teaser: a small, looping preview of the handwritten
+  // note from /start, cycling through the same six moments listed in
+  // the Moments section below (and used to pre-fill the enquiry form),
+  // rather than inventing separate example copy. Static on one example
+  // if the visitor prefers reduced motion.
+  var noteTeaserLine = document.querySelector(".note-teaser__line");
+  if (noteTeaserLine) {
+    var teaserMoments = [
+      "a new baby arrives",
+      "a big birthday lands",
+      "a chapter ends",
+      "a heart is breaking",
+      "a fresh start begins",
+      "someone needs to feel seen",
+    ];
+    var setTeaserLine = function (text) {
+      noteTeaserLine.textContent = "A box for when " + text + ".";
+    };
+    setTeaserLine(teaserMoments[0]);
+    if (prefersReducedMotion) {
+      noteTeaserLine.classList.add("is-visible");
+    } else {
+      var teaserIndex = 0;
+      noteTeaserLine.classList.add("is-visible");
+      setInterval(function () {
+        noteTeaserLine.classList.remove("is-visible");
+        setTimeout(function () {
+          teaserIndex = (teaserIndex + 1) % teaserMoments.length;
+          setTeaserLine(teaserMoments[teaserIndex]);
+          noteTeaserLine.classList.add("is-visible");
+        }, 400);
+      }, 2800);
+    }
+  }
+
   // Footer lighting: the footer art is a painted night scene, so it can't
   // become a daytime photo -- instead this varies the lantern's glow and
   // an overall warmth tint by the visitor's local hour, night reading
