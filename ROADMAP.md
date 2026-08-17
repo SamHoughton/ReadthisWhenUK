@@ -96,7 +96,7 @@ new ones.
 
 ---
 
-## 6. A footer that knows what time it is
+## 6. A footer that knows what time it is — ✅ shipped
 
 **Pitch:** The footer is already a night scene with a lantern. Tie its
 lighting to the visitor's actual local time (or season) instead of

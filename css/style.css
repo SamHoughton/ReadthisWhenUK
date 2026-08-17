@@ -1256,7 +1256,14 @@ em {
 /* ---------------- Footer ---------------- */
 
 .site-footer {
+  /* Overridden by JS with the visitor's local time of day; left neutral
+     here so the footer looks exactly as before if JS never runs. */
+  --footer-tint: 20, 8, 13;
+  --footer-tint-alpha: 0;
+  --footer-glow-alpha: 0;
   background:
+    radial-gradient(220px 170px at 42% 76%, rgba(247, 179, 96, var(--footer-glow-alpha)), transparent 70%),
+    linear-gradient(rgba(var(--footer-tint), var(--footer-tint-alpha)), rgba(var(--footer-tint), var(--footer-tint-alpha))),
     linear-gradient(
       to right,
       rgba(20, 8, 13, 0.5) 0%,
@@ -1289,6 +1296,8 @@ em {
        desktop scrim (tuned for that horizontal spread) no longer lines
        up with where the text actually sits. */
     background:
+      radial-gradient(180px 140px at 42% 76%, rgba(247, 179, 96, var(--footer-glow-alpha)), transparent 70%),
+      linear-gradient(rgba(var(--footer-tint), var(--footer-tint-alpha)), rgba(var(--footer-tint), var(--footer-tint-alpha))),
       linear-gradient(to right, rgba(20, 8, 13, 0.55) 0%, rgba(20, 8, 13, 0.55) 55%, transparent 82%),
       url("../images/footer.png") center / cover no-repeat;
     background-color: var(--dark-surface);

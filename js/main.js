@@ -46,6 +46,26 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Footer lighting: the footer art is a painted night scene, so it can't
+  // become a daytime photo -- instead this varies the lantern's glow and
+  // an overall warmth tint by the visitor's local hour, night reading
+  // richest and midday reading calmest. Glow is centred on the lantern's
+  // actual position in images/footer.png.
+  var footerEl = document.querySelector(".site-footer");
+  if (footerEl) {
+    var hour = new Date().getHours();
+    var phase = hour >= 6 && hour < 17 ? "day" : hour >= 17 && hour < 21 ? "evening" : "night";
+    var lighting = {
+      day: { tint: "38, 48, 70", tintAlpha: 0.3, glowAlpha: 0.18 },
+      evening: { tint: "80, 34, 18", tintAlpha: 0.08, glowAlpha: 0.65 },
+      night: { tint: "8, 5, 12", tintAlpha: 0.15, glowAlpha: 0.45 },
+    }[phase];
+    footerEl.style.setProperty("--footer-tint", lighting.tint);
+    footerEl.style.setProperty("--footer-tint-alpha", lighting.tintAlpha);
+    footerEl.style.setProperty("--footer-glow-alpha", lighting.glowAlpha);
+    footerEl.setAttribute("data-daypart", phase);
+  }
+
   // Header rides transparent over the full-screen hero, then picks up
   // a solid background once the hero has scrolled out from under it.
   var header = document.querySelector(".site-header");
