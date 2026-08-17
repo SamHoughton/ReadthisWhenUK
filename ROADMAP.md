@@ -147,7 +147,7 @@ transparent-over-hero state specifically, since blur only reads as
 
 ---
 
-## 8. Kinetic type accents
+## 8. Kinetic type accents — ✅ shipped
 
 **Pitch:** Let a small number of key headings (hero line, section
 intros) animate in with a little more character than the current
@@ -168,7 +168,7 @@ fast if every heading on the page does it.
 
 ---
 
-## 9. Scroll-progress thread
+## 9. Scroll-progress thread — ✅ shipped
 
 **Pitch:** A thin vertical line that fills in as the visitor scrolls
 down the page — not a generic progress bar, but styled as the same

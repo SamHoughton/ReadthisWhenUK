@@ -63,6 +63,24 @@
     window.addEventListener("resize", updateHeaderState);
   }
 
+  // Scroll-progress thread: the journey connector's dashed line, stretched
+  // to page length. Height set directly rather than via transform: scaleY,
+  // so the dash pattern stays evenly spaced at any scroll position instead
+  // of stretching/compressing with the scale factor.
+  var scrollThread = document.querySelector(".scroll-thread");
+  var scrollThreadFill = document.querySelector(".scroll-thread__fill");
+  if (scrollThread && scrollThreadFill) {
+    var updateScrollThread = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = max > 0 ? window.scrollY / max : 0;
+      progress = Math.min(1, Math.max(0, progress));
+      scrollThreadFill.style.height = (progress * scrollThread.clientHeight) + "px";
+    };
+    updateScrollThread();
+    window.addEventListener("scroll", updateScrollThread, { passive: true });
+    window.addEventListener("resize", updateScrollThread);
+  }
+
   // "You are here": mirror the .ink-link hover underline onto whichever
   // nav item matches the section currently in view. Driven by top-edge
   // crossing rather than IntersectionObserver, since #business nests
