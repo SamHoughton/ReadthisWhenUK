@@ -1864,6 +1864,17 @@ em {
   color: var(--ink-faint);
   margin: 0;
 }
+.builder .keepsake {
+  display: flex;
+  justify-content: center;
+  margin: 1.8rem 0 0;
+}
+.builder .keepsake svg {
+  filter: drop-shadow(0 10px 22px rgba(36, 16, 25, 0.35));
+}
+.builder .keepsake__save {
+  margin-top: 1.3rem;
+}
 
 /* mobile: keep the note visible near the top instead of buried below
    every question, since it's the live preview of what's being sent */

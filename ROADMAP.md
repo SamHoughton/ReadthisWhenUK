@@ -47,7 +47,7 @@ it from). Worth returning to once that exists.
 
 ---
 
-## 3. A generative keepsake at the end of `/start`
+## 3. A generative keepsake at the end of `/start` — ✅ shipped
 
 **Pitch:** Finishing the builder currently just shows "Sealed and
 sent." Instead, generate a small one-off wax-seal or postmark image —
