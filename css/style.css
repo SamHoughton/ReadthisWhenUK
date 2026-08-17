@@ -313,6 +313,12 @@ em {
   background-image: var(--underline-cream);
 }
 
+/* ---------------- Kinetic type ---------------- */
+
+.kinetic-word {
+  display: inline-block;
+}
+
 /* ---------------- Type helpers ---------------- */
 
 .eyebrow {

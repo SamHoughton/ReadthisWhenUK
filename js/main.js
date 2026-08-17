@@ -130,10 +130,75 @@
       });
     });
 
+    // Kinetic type: a restrained word-level stagger on a handful of key
+    // headings (hero line + the three chapter-intro headings), layered
+    // on top of their existing block reveal rather than replacing it --
+    // the block still fades/rises as a whole, the words inside it
+    // stagger a beat behind. Word-level rather than character-level:
+    // splitting to characters reads as a gimmick performed once, this
+    // is meant to read as texture.
+    var splitIntoWords = function (el) {
+      var words = [];
+      var walk = function (node) {
+        Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+          if (child.nodeType === Node.TEXT_NODE) {
+            var frag = document.createDocumentFragment();
+            child.textContent.split(/(\s+)/).forEach(function (part) {
+              if (part === "") return;
+              if (/^\s+$/.test(part)) {
+                frag.appendChild(document.createTextNode(part));
+                return;
+              }
+              var span = document.createElement("span");
+              span.className = "kinetic-word";
+              span.textContent = part;
+              frag.appendChild(span);
+              words.push(span);
+            });
+            node.replaceChild(frag, child);
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            walk(child);
+          }
+        });
+      };
+      walk(el);
+      return words;
+    };
+
+    document
+      .querySelectorAll(".band__title, .section-title, .closer__title")
+      .forEach(function (heading) {
+        var words = splitIntoWords(heading);
+        var revealParent = heading.closest("[data-reveal]") || heading;
+        gsap.from(words, {
+          opacity: 0,
+          y: 10,
+          duration: 0.5,
+          stagger: 0.035,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: revealParent,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+
     // Hero: media drifts slower than scroll, copy drifts opposite,
     // a real parallax handoff rather than a static banner.
     var heroMedia = document.querySelector(".hero__media img, .hero__media video");
     var heroCopy = document.querySelector(".hero__copy");
+    var heroTitle = document.querySelector(".hero__title");
+    if (heroTitle) {
+      gsap.from(splitIntoWords(heroTitle), {
+        opacity: 0,
+        y: 14,
+        duration: 0.7,
+        stagger: 0.04,
+        ease: "power2.out",
+        delay: 0.15,
+      });
+    }
     if (heroMedia) {
       gsap.to(heroMedia, {
         yPercent: 14,
