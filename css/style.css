@@ -305,7 +305,8 @@ em {
   padding-bottom: 0.15em;
 }
 .ink-link:hover,
-.ink-link:focus-visible {
+.ink-link:focus-visible,
+.ink-link.is-active {
   background-size: 100% 6px;
 }
 .ink-link--dark {

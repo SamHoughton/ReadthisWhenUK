@@ -63,6 +63,35 @@
     window.addEventListener("resize", updateHeaderState);
   }
 
+  // "You are here": mirror the .ink-link hover underline onto whichever
+  // nav item matches the section currently in view. Driven by top-edge
+  // crossing rather than IntersectionObserver, since #business nests
+  // inside #pricing and a plain visibility check can't tell which of
+  // the two should count as "current".
+  var navTargets = Array.prototype.slice
+    .call(document.querySelectorAll(".nav a[href^='#']"))
+    .map(function (link) {
+      var target = document.querySelector(link.getAttribute("href"));
+      return target ? { link: link, target: target } : null;
+    })
+    .filter(Boolean);
+
+  if (navTargets.length && header) {
+    var updateActiveNav = function () {
+      var line = header.offsetHeight + 40;
+      var current = null;
+      navTargets.forEach(function (entry) {
+        if (entry.target.getBoundingClientRect().top <= line) current = entry;
+      });
+      navTargets.forEach(function (entry) {
+        entry.link.classList.toggle("is-active", entry === current);
+      });
+    };
+    updateActiveNav();
+    window.addEventListener("scroll", updateActiveNav, { passive: true });
+    window.addEventListener("resize", updateActiveNav);
+  }
+
   // Mobile nav toggle
   var toggle = document.getElementById("nav-toggle");
   var navPanel = document.getElementById("site-nav");
