@@ -125,7 +125,7 @@ rather than introducing a new visual language.
 
 ---
 
-## 7. Frosted-glass header
+## 7. Frosted-glass header — ✅ shipped
 
 **Pitch:** Add `backdrop-filter: blur()` to `.site-header` in both its
 states — transparent-over-hero and `.site-header--scrolled` — so the
@@ -188,7 +188,7 @@ plain scroll listener, same pattern as `startAccentDrift`.
 
 ---
 
-## 10. "You are here" nav tracking
+## 10. "You are here" nav tracking — ✅ shipped
 
 **Pitch:** As the visitor scrolls through sections, the matching nav
 link picks up the site's existing `.ink-link` underline-draw treatment
