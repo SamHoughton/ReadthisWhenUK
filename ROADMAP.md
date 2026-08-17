@@ -7,7 +7,7 @@ roughly by how much it matters, not how easy it is.
 
 ---
 
-## 1. Animated fulfillment journey
+## 1. Animated fulfillment journey — ✅ shipped
 
 **Pitch:** Turn "How it works" from three paragraphs of prose into a
 short scroll-driven illustrated sequence: a message arrives, Alice
@@ -110,3 +110,96 @@ keeping with the site's craft-over-flash direction.
 onto the existing footer background/scrim setup. No new assets
 strictly required, though a couple of lighting variants would sell it
 better than one.
+
+---
+
+## Modern accents
+
+A second, smaller list — restrained motion and surface treatments,
+not a redesign. The brief here: keep the current warm/craft feel as
+the foundation and layer a bit more polish and kinetic life on top,
+the way the button depth and journey animation already have. Nothing
+in this section replaces existing layout or changes the site's tone;
+each item reuses a mechanism or motif that's already in the codebase
+rather than introducing a new visual language.
+
+---
+
+## 7. Frosted-glass header
+
+**Pitch:** Add `backdrop-filter: blur()` to `.site-header` in both its
+states — transparent-over-hero and `.site-header--scrolled` — so the
+nav reads as a pane of glass over whatever's beneath it instead of a
+flat tint. Same bar, same position, same links; no floating pill, no
+detaching it from the top of the page.
+
+**Why it matters:** This is the one idea from the outside critique
+that's genuinely worth having — it's a small, modern surface upgrade
+that costs nothing structurally. Deliberately scoped down from "glass
+nav bar" as a whole new floating component, which would fight the
+site's grounded, page-anchored layout.
+
+**Shape:** A few lines of CSS on the existing `.site-header` and
+`.site-header--scrolled` rules. Needs a fallback background-color for
+browsers without `backdrop-filter` support, and a check against the
+transparent-over-hero state specifically, since blur only reads as
+"glass" when there's something visible moving underneath it.
+
+---
+
+## 8. Kinetic type accents
+
+**Pitch:** Let a small number of key headings (hero line, section
+intros) animate in with a little more character than the current
+uniform fade/rise — letter or word-level stagger on entrance, tied to
+the same ScrollTrigger reveals already driving `[data-reveal]`.
+
+**Why it matters:** Was the one thing from the outside critique that
+still appealed on its own merits, separate from the glass nav.
+Explicitly *not* the "morph into handwritten script" version that
+review suggested — that reads as a gimmick performed once and never
+again. A restrained stagger is a texture, not a trick.
+
+**Shape:** GSAP's `SplitText`-style word/char wrapping (or a small
+hand-rolled span-splitter, to avoid a second paid plugin) feeding into
+the existing `gsap.from(...)` reveal calls in `main.js`. Scoped to a
+handful of headings, not applied sitewide — this stops being subtle
+fast if every heading on the page does it.
+
+---
+
+## 9. Scroll-progress thread
+
+**Pitch:** A thin vertical line that fills in as the visitor scrolls
+down the page — not a generic progress bar, but styled as the same
+dashed/thread motif already used for the journey connectors, running
+the full height of the page rather than just between four frames.
+
+**Why it matters:** Direct answer to "more scroll choreography"
+without adding a new visual idiom — it's the journey connector,
+already built, stretched to page-length. Gives the site a small piece
+of the kinetic feel the critique was reaching for, using furniture
+that already exists.
+
+**Shape:** A fixed-position element, height driven by
+`scrollY / (document height - viewport height)`, most simply as a
+`transform: scaleY()` on a thread-styled div. No new dependency —
+plain scroll listener, same pattern as `startAccentDrift`.
+
+---
+
+## 10. "You are here" nav tracking
+
+**Pitch:** As the visitor scrolls through sections, the matching nav
+link picks up the site's existing `.ink-link` underline-draw treatment
+automatically, instead of that hover effect only firing on mouseover.
+
+**Why it matters:** Cheap, and answers "does the nav feel alive" with
+something more useful than decoration — it's wayfinding. Reuses
+`.ink-link` exactly as it already renders on hover, just triggered by
+scroll position (via `IntersectionObserver` on each section) instead
+of by the pointer.
+
+**Shape:** Small — one `IntersectionObserver` watching section
+anchors, toggling an `is-active` class on the matching `.nav a` that
+maps to the existing `.ink-link` CSS. No new assets, no new plugin.
